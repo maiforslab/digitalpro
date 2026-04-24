@@ -1,0 +1,13 @@
+[common]
+RuntimePath = /var/run/falahos
+
+[app]
+LogPath = /var/log/falahos/
+LogSaveName = app-management
+LogFileExt = log
+AppStorePath = /var/lib/falahos/istore
+AppsPath = /var/lib/falahos/apps
+
+[server]
+# Falah OS iStore — Sovereign App Registry
+appstore = https://api.falah-consultancy.ltd/istore/apps.json

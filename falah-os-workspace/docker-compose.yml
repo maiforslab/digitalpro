@@ -1,0 +1,95 @@
+# ─────────────────────────────────────────────────────────────────
+#  Falah OS Community Edition v1.0 — Docker Compose
+#  Usage: docker compose up -d
+# ─────────────────────────────────────────────────────────────────
+version: "3.9"
+
+networks:
+  falahos_network:
+    driver: bridge
+
+volumes:
+  falahos_data:
+  falahos_config:
+  falahos_apps:
+
+services:
+
+  # ── Falah OS Gateway (reverse proxy / service router) ──────────
+  falahos-gateway:
+    image: golang:1.21-alpine
+    container_name: falahos-gateway
+    working_dir: /app
+    command: >
+      sh -c "apk add --no-cache git &&
+             cd /app/CasaOS-Gateway &&
+             go run . 2>&1 || echo 'Gateway: run go run . after go mod download'"
+    volumes:
+      - .:/app:ro
+      - falahos_config:/etc/falahos
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - falahos_network
+    restart: unless-stopped
+
+  # ── Falah OS App Management ────────────────────────────────────
+  falahos-app-management:
+    image: golang:1.21-alpine
+    container_name: falahos-app-management
+    working_dir: /app
+    command: >
+      sh -c "apk add --no-cache git &&
+             cd /app/CasaOS-AppManagement &&
+             go run . 2>&1 || echo 'AppMgmt: run go run . after go mod download'"
+    volumes:
+      - .:/app:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - falahos_data:/var/lib/falahos
+      - falahos_config:/etc/falahos
+    networks:
+      - falahos_network
+    restart: unless-stopped
+    depends_on:
+      - falahos-gateway
+
+  # ── Falah OS Dashboard (Vue.js served via nginx) ───────────────
+  falahos-ui:
+    image: node:18-alpine
+    container_name: falahos-ui
+    working_dir: /app/CasaOS-UI
+    command: >
+      sh -c "npm install --legacy-peer-deps --silent &&
+             npm run serve -- --port 3000 --host 0.0.0.0"
+    environment:
+      - NODE_ENV=development
+      - VITE_APP_NAME=Falah OS
+      - VUE_APP_TITLE=Falah OS Community Edition
+    volumes:
+      - ./CasaOS-UI:/app/CasaOS-UI
+    ports:
+      - "3000:3000"
+    networks:
+      - falahos_network
+    restart: unless-stopped
+
+  # ── Falah OS Core ──────────────────────────────────────────────
+  falahos-core:
+    image: golang:1.21-alpine
+    container_name: falahos-core
+    working_dir: /app
+    command: >
+      sh -c "apk add --no-cache git &&
+             cd /app/CasaOS &&
+             go run . 2>&1 || echo 'Core: run go run . after go mod download'"
+    volumes:
+      - .:/app:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - falahos_data:/var/lib/falahos
+      - falahos_config:/etc/falahos
+    networks:
+      - falahos_network
+    restart: unless-stopped
+    depends_on:
+      - falahos-gateway

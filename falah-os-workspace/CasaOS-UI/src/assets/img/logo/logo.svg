@@ -1,0 +1,13 @@
+<!-- Falah OS Logo: Islamic star + wordmark -->
+<svg width="200" height="48" viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Islamic 8-pointed star -->
+  <g transform="translate(24,24)">
+    <polygon points="0,-18 4.2,-4.2 18,0 4.2,4.2 0,18 -4.2,4.2 -18,0 -4.2,-4.2" fill="#10b981"/>
+    <polygon points="0,-12 2.8,-2.8 12,0 2.8,2.8 0,12 -2.8,2.8 -12,0 -2.8,-2.8" fill="#0f172a"/>
+    <circle cx="0" cy="0" r="3.5" fill="#10b981"/>
+  </g>
+  <!-- FALAH OS wordmark -->
+  <text x="52" y="20" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="15" font-weight="700" fill="#10b981" letter-spacing="1">FALAH OS</text>
+  <!-- Community Edition subtext -->
+  <text x="52" y="36" font-family="system-ui,-apple-system,BlinkMacSystemFont,sans-serif" font-size="8.5" font-weight="400" fill="#64748b" letter-spacing="2.5">COMMUNITY EDITION</text>
+</svg>
