@@ -1,0 +1,91 @@
+/************************************
+*
+* Falah OS Widgets — Islamic Sovereign Premium glassmorphism
+*
+*************************************/
+
+.widget {
+	border-radius: $backDropBorderRadius;
+	position: relative;
+	margin-bottom: 1rem;
+	transition: all 0.3s;
+	// Glassmorphism: frosted deep-slate
+	background: rgba(15, 23, 42, 0.55) !important;
+	backdrop-filter: blur(16px) saturate(180%);
+	-webkit-backdrop-filter: blur(16px) saturate(180%);
+	border: 1px solid rgba(16, 185, 129, 0.12) !important;
+	box-shadow: 0 4px 32px -4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+	.columns {
+		margin-bottom: 0;
+	}
+
+	&:hover {
+		border-color: rgba(16, 185, 129, 0.28) !important;
+		box-shadow: 0 8px 40px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(16, 185, 129, 0.1);
+	}
+
+	.widget-content {
+		padding: 1rem 1.25rem;
+		position: relative;
+		z-index: 10;
+	}
+
+	.widget-header {
+		margin-right: -0.25rem;
+		align-items: center;
+		position: relative;
+		z-index: 4;
+
+		.widget-title {
+			color: #f1f5f9;
+			font-size: 1.125rem;
+			line-height: 1.75rem;
+			font-weight: 600;
+			padding-left: 0.6rem;
+			border-left: 2px solid #10b981;
+		}
+
+		.widget-icon-button {
+			width: 1.5rem;
+			height: 1.5rem;
+			cursor: pointer;
+			color: #10b981;
+		}
+	}
+
+	// Emerald gradient progress bars
+	.progress {
+		background: rgba(16, 185, 129, 0.12) !important;
+		border-radius: 9999px;
+
+		&::-webkit-progress-value {
+			background: linear-gradient(90deg, #0d9488 0%, #10b981 100%) !important;
+			border-radius: 9999px;
+		}
+		&::-moz-progress-bar {
+			background: linear-gradient(90deg, #0d9488 0%, #10b981 100%) !important;
+			border-radius: 9999px;
+		}
+	}
+}
+
+.last-block {
+	margin-bottom: 0;
+	
+	&.widget {
+		margin-bottom: 0;
+	}
+	
+	.widget {
+		margin-bottom: 0;
+	}
+}
+
+
+.is-noscroll,
+.is-clipped {
+	.widget {
+		backdrop-filter: none !important;
+	}
+}
