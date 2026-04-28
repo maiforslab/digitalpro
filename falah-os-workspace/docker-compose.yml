@@ -13,9 +13,9 @@ services:
       - "80:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - falahos_data:/var/lib/casaos
-      - falahos_config:/etc/casaos
-      - falahos_logs:/var/log/casaos
+      - falahos_data:/var/lib/falahos
+      - falahos_config:/etc/falahos
+      - falahos_logs:/var/log/falahos
     restart: unless-stopped
 
 volumes:
