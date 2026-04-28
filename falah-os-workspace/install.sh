@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Re-execute with sudo if not root
+# Require root (sudo)
 if [ "$(id -u)" -ne 0 ]; then
-  exec sudo bash "$0" "$@"
+  printf 'Error: run with sudo:\n'
+  printf '  curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/master/falah-os-workspace/install.sh | sudo bash\n'
+  exit 1
 fi
 
 REPO="https://github.com/maiforslab/digitalpro.git"
@@ -60,5 +62,5 @@ printf '  ✓ Falah OS is live at:  http://%s\n' "$IP"
 printf '\n'
 printf '  Logs:    docker logs -f falahos\n'
 printf '  Stop:    cd %s && docker compose down\n' "$INSTALL_DIR/falah-os-workspace"
-printf '  Update:  curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/master/falah-os-workspace/install.sh | bash\n'
+printf '  Update:  curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/master/falah-os-workspace/install.sh | sudo bash\n'
 printf '\n'
