@@ -7,7 +7,7 @@ import {
 	ComposeMethodsApiFactory,
 	InternalMethodsApiFactory,
 	iStoreMethodsApiFactory, iStoreMethodsApiFp, iStoreMethodsApi
-} from "@icewhale/falahos-appmanagement-openapi";
+} from "@icewhale/casaos-appmanagement-openapi";
 
 // 初始化 openapi 配置
 const config = new Configuration({});
