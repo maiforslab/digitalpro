@@ -52,7 +52,7 @@ func TestFilterCatalogByAuthorType(t *testing.T) {
 	filteredCatalog := v2.FilterCatalogByAuthorType(catalog, "test")
 	assert.Equal(t, len(filteredCatalog), 0)
 
-	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByCasaos)
+	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByFalahos)
 	assert.Equal(t, len(filteredCatalog), 0)
 
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.Official)
@@ -72,7 +72,7 @@ func TestFilterCatalogByAuthorType(t *testing.T) {
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, "test")
 	assert.Equal(t, len(filteredCatalog), 0)
 
-	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByCasaos)
+	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByFalahos)
 	assert.Equal(t, len(filteredCatalog), 1)
 
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.Official)
@@ -93,7 +93,7 @@ func TestFilterCatalogByAuthorType(t *testing.T) {
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, "test")
 	assert.Equal(t, len(filteredCatalog), 0)
 
-	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByCasaos)
+	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByFalahos)
 	assert.Equal(t, len(filteredCatalog), 1)
 
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.Official)
@@ -114,7 +114,7 @@ func TestFilterCatalogByAuthorType(t *testing.T) {
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, "test")
 	assert.Equal(t, len(filteredCatalog), 0)
 
-	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByCasaos)
+	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.ByFalahos)
 	assert.Equal(t, len(filteredCatalog), 1)
 
 	filteredCatalog = v2.FilterCatalogByAuthorType(catalog, codegen.Official)

@@ -103,7 +103,7 @@ func (a *ComposeApp) AuthorType() codegen.StoreAppAuthorType {
 		return codegen.Official
 	}
 	if strings.EqualFold(storeInfo.Author, common.ComposeAppAuthorFalahOSTeam) {
-		return codegen.ByCasaos
+		return codegen.ByFalahos
 	}
 
 	return codegen.Community

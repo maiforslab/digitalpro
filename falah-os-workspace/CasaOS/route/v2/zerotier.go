@@ -12,11 +12,11 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-func (s *Falah OS) SetZerotierNetworkStatus(ctx echo.Context, networkId string) error {
+func (s *FalahOS) SetZerotierNetworkStatus(ctx echo.Context, networkId string) error {
 
 	return ctx.JSON(http.StatusOK, nil)
 }
-func (s *Falah OS) GetZerotierInfo(ctx echo.Context) error {
+func (s *FalahOS) GetZerotierInfo(ctx echo.Context) error {
 	info := codegen.GetZTInfoOK{}
 	respBody, err := httper.ZTGet("/controller/network")
 	if err != nil {
