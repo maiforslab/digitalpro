@@ -18,8 +18,8 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/IceWhaleTech/Falah OS/model"
-	"github.com/IceWhaleTech/Falah OS/service"
+	"github.com/IceWhaleTech/CasaOS/model"
+	"github.com/IceWhaleTech/CasaOS/service"
 )
 
 func SendAllHardwareStatusBySocket() {

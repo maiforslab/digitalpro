@@ -18,17 +18,17 @@ import (
 	"time"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/model"
+	"github.com/IceWhaleTech/CasaOS/model"
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo/v4"
 	"github.com/robfig/cron/v3"
 	"github.com/tidwall/gjson"
 
-	"github.com/IceWhaleTech/Falah OS/pkg/utils"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/common_err"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
-	"github.com/IceWhaleTech/Falah OS/service"
-	model2 "github.com/IceWhaleTech/Falah OS/service/model"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/common_err"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
+	"github.com/IceWhaleTech/CasaOS/service"
+	model2 "github.com/IceWhaleTech/CasaOS/service/model"
 
 	"github.com/google/uuid"
 	"go.uber.org/zap"

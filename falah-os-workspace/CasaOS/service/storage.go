@@ -4,8 +4,8 @@ import (
 	"io/ioutil"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/httper"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/httper"
 	"go.uber.org/zap"
 )
 

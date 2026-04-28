@@ -19,13 +19,13 @@ import (
 
 	util_http "github.com/IceWhaleTech/CasaOS-Common/utils/http"
 
-	"github.com/IceWhaleTech/Falah OS/common"
-	"github.com/IceWhaleTech/Falah OS/pkg/cache"
-	"github.com/IceWhaleTech/Falah OS/pkg/config"
-	"github.com/IceWhaleTech/Falah OS/pkg/sqlite"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
-	"github.com/IceWhaleTech/Falah OS/route"
-	"github.com/IceWhaleTech/Falah OS/service"
+	"github.com/IceWhaleTech/CasaOS/common"
+	"github.com/IceWhaleTech/CasaOS/pkg/cache"
+	"github.com/IceWhaleTech/CasaOS/pkg/config"
+	"github.com/IceWhaleTech/CasaOS/pkg/sqlite"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
+	"github.com/IceWhaleTech/CasaOS/route"
+	"github.com/IceWhaleTech/CasaOS/service"
 	"github.com/coreos/go-systemd/daemon"
 	"go.uber.org/zap"
 

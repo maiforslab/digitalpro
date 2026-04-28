@@ -20,8 +20,8 @@ import (
 	"time"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/model"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
+	"github.com/IceWhaleTech/CasaOS/model"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
 	"github.com/moby/sys/mountinfo"
 	"go.uber.org/zap"
 )

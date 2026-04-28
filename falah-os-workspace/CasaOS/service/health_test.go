@@ -3,7 +3,7 @@ package service_test
 import (
 	"testing"
 
-	"github.com/IceWhaleTech/Falah OS/service"
+	"github.com/IceWhaleTech/CasaOS/service"
 	"github.com/stretchr/testify/assert"
 )
 

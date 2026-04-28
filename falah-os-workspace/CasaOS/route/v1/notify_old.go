@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/IceWhaleTech/Falah OS/service"
-	"github.com/IceWhaleTech/Falah OS/types"
+	"github.com/IceWhaleTech/CasaOS/service"
+	"github.com/IceWhaleTech/CasaOS/types"
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo/v4"
 )

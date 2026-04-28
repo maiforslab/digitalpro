@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/internal/conf"
-	"github.com/IceWhaleTech/Falah OS/internal/driver"
-	"github.com/IceWhaleTech/Falah OS/model"
+	"github.com/IceWhaleTech/CasaOS/internal/conf"
+	"github.com/IceWhaleTech/CasaOS/internal/driver"
+	"github.com/IceWhaleTech/CasaOS/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"

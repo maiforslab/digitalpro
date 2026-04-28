@@ -9,11 +9,11 @@ import (
 	"time"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/common"
-	model2 "github.com/IceWhaleTech/Falah OS/model"
-	"github.com/IceWhaleTech/Falah OS/model/notify"
-	"github.com/IceWhaleTech/Falah OS/service/model"
-	"github.com/IceWhaleTech/Falah OS/types"
+	"github.com/IceWhaleTech/CasaOS/common"
+	model2 "github.com/IceWhaleTech/CasaOS/model"
+	"github.com/IceWhaleTech/CasaOS/model/notify"
+	"github.com/IceWhaleTech/CasaOS/service/model"
+	"github.com/IceWhaleTech/CasaOS/types"
 	"go.uber.org/zap"
 	"golang.org/x/sync/syncmap"
 

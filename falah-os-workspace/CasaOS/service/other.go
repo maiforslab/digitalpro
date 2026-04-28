@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/model"
+	"github.com/IceWhaleTech/CasaOS/model"
 	"github.com/go-resty/resty/v2"
 	"github.com/tidwall/gjson"
 	"go.uber.org/zap"

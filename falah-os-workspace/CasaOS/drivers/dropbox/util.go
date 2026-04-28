@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/drivers/base"
+	"github.com/IceWhaleTech/CasaOS/drivers/base"
 	"github.com/go-resty/resty/v2"
 	"go.uber.org/zap"
 )

@@ -8,10 +8,10 @@ import (
 	"strconv"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/drivers/base"
-	"github.com/IceWhaleTech/Falah OS/internal/driver"
-	"github.com/IceWhaleTech/Falah OS/model"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils"
+	"github.com/IceWhaleTech/CasaOS/drivers/base"
+	"github.com/IceWhaleTech/CasaOS/internal/driver"
+	"github.com/IceWhaleTech/CasaOS/model"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils"
 	"github.com/go-resty/resty/v2"
 	"go.uber.org/zap"
 )

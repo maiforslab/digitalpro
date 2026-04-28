@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/IceWhaleTech/Falah OS/pkg/sign"
+	"github.com/IceWhaleTech/CasaOS/pkg/sign"
 )
 
 var once sync.Once

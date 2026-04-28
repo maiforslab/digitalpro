@@ -10,13 +10,13 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/IceWhaleTech/Falah OS/codegen"
-	"github.com/IceWhaleTech/Falah OS/pkg/config"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
+	"github.com/IceWhaleTech/CasaOS/codegen"
+	"github.com/IceWhaleTech/CasaOS/pkg/config"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
 
 	"github.com/IceWhaleTech/CasaOS-Common/external"
 	"github.com/IceWhaleTech/CasaOS-Common/utils/jwt"
-	v2Route "github.com/IceWhaleTech/Falah OS/route/v2"
+	v2Route "github.com/IceWhaleTech/CasaOS/route/v2"
 	"github.com/deepmap/oapi-codegen/pkg/middleware"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/getkin/kin-openapi/openapi3filter"
