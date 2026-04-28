@@ -16,7 +16,7 @@ RUN git clone --depth 1 https://github.com/IceWhaleTech/CasaOS-MessageBus.git &&
     go mod download && \
     CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/message-bus .
 
-# Gateway — copy go.mod first for layer caching
+# Gateway
 COPY CasaOS-Gateway/go.mod CasaOS-Gateway/go.sum ./CasaOS-Gateway/
 RUN cd CasaOS-Gateway && go mod download
 COPY CasaOS-Gateway/ ./CasaOS-Gateway/
@@ -45,25 +45,25 @@ COPY --from=go-builder /out/gateway      /usr/local/bin/falahos-gateway
 COPY --from=go-builder /out/core         /usr/local/bin/falahos-core
 COPY --from=go-builder /out/appmgmt      /usr/local/bin/falahos-appmgmt
 
-# Runtime and data directories
+# Runtime and data directories — all under /falahos namespace
 RUN mkdir -p \
-    /var/run/casaos \
-    /var/lib/casaos/www \
-    /var/lib/casaos/db \
-    /var/lib/casaos/apps \
-    /var/lib/casaos/istore \
-    /var/lib/casaos/conf \
-    /var/log/casaos \
-    /etc/casaos \
-    /usr/share/casaos/shell
+    /var/run/falahos \
+    /var/lib/falahos/www \
+    /var/lib/falahos/db \
+    /var/lib/falahos/apps \
+    /var/lib/falahos/istore \
+    /var/lib/falahos/conf \
+    /var/log/falahos \
+    /etc/falahos \
+    /usr/share/falahos/shell
 
 # Pre-built Falah OS frontend
-COPY dist/ /var/lib/casaos/www/
+COPY dist/ /var/lib/falahos/www/
 
 # Service config files
-COPY config/falahos.conf          /etc/casaos/falahos.conf
-COPY config/gateway.ini           /etc/casaos/gateway.ini
-COPY config/app-management.conf   /etc/casaos/app-management.conf
+COPY config/falahos.conf          /etc/falahos/falahos.conf
+COPY config/gateway.ini           /etc/falahos/gateway.ini
+COPY config/app-management.conf   /etc/falahos/app-management.conf
 
 # Supervisord config
 COPY supervisord.conf /etc/supervisord.conf
