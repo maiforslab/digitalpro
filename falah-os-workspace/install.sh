@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Re-execute with sudo if not root
+if [ "$(id -u)" -ne 0 ]; then
+  exec sudo bash "$0" "$@"
+fi
+
 REPO="https://github.com/maiforslab/digitalpro.git"
 BRANCH="master"
 INSTALL_DIR="/opt/falahos"
