@@ -1,9 +1,9 @@
 package drivers
 
 import (
-	_ "github.com/IceWhaleTech/Falah OS/drivers/dropbox"
-	_ "github.com/IceWhaleTech/Falah OS/drivers/google_drive"
-	_ "github.com/IceWhaleTech/Falah OS/drivers/onedrive"
+	_ "github.com/IceWhaleTech/CasaOS/drivers/dropbox"
+	_ "github.com/IceWhaleTech/CasaOS/drivers/google_drive"
+	_ "github.com/IceWhaleTech/CasaOS/drivers/onedrive"
 )
 
 // All do nothing,just for import

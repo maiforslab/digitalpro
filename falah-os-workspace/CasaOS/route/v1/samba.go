@@ -23,12 +23,12 @@ import (
 	"github.com/labstack/echo/v4"
 	"go.uber.org/zap"
 
-	"github.com/IceWhaleTech/Falah OS/model"
-	"github.com/IceWhaleTech/Falah OS/pkg/samba"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/common_err"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
-	"github.com/IceWhaleTech/Falah OS/service"
-	model2 "github.com/IceWhaleTech/Falah OS/service/model"
+	"github.com/IceWhaleTech/CasaOS/model"
+	"github.com/IceWhaleTech/CasaOS/pkg/samba"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/common_err"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
+	"github.com/IceWhaleTech/CasaOS/service"
+	model2 "github.com/IceWhaleTech/CasaOS/service/model"
 )
 
 // service

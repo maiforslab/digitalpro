@@ -3,7 +3,7 @@ package gredis
 import (
 	"time"
 
-	"github.com/IceWhaleTech/Falah OS/model"
+	"github.com/IceWhaleTech/CasaOS/model"
 	"github.com/gomodule/redigo/redis"
 )
 

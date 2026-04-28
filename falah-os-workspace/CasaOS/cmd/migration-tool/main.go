@@ -17,10 +17,10 @@ import (
 
 	interfaces "github.com/IceWhaleTech/CasaOS-Common"
 	"github.com/IceWhaleTech/CasaOS-Common/utils/systemctl"
-	"github.com/IceWhaleTech/Falah OS/common"
-	"github.com/IceWhaleTech/Falah OS/pkg/config"
-	"github.com/IceWhaleTech/Falah OS/pkg/sqlite"
-	"github.com/IceWhaleTech/Falah OS/service"
+	"github.com/IceWhaleTech/CasaOS/common"
+	"github.com/IceWhaleTech/CasaOS/pkg/config"
+	"github.com/IceWhaleTech/CasaOS/pkg/sqlite"
+	"github.com/IceWhaleTech/CasaOS/service"
 	"gorm.io/gorm"
 )
 

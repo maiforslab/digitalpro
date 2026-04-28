@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/drivers/base"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils"
+	"github.com/IceWhaleTech/CasaOS/drivers/base"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils"
 	"go.uber.org/zap"
 )
 

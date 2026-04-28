@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/drivers/dropbox"
-	"github.com/IceWhaleTech/Falah OS/drivers/google_drive"
-	"github.com/IceWhaleTech/Falah OS/drivers/onedrive"
-	"github.com/IceWhaleTech/Falah OS/service"
+	"github.com/IceWhaleTech/CasaOS/drivers/dropbox"
+	"github.com/IceWhaleTech/CasaOS/drivers/google_drive"
+	"github.com/IceWhaleTech/CasaOS/drivers/onedrive"
+	"github.com/IceWhaleTech/CasaOS/service"
 	"github.com/labstack/echo/v4"
 	"go.uber.org/zap"
 )

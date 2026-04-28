@@ -18,12 +18,12 @@ import (
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/file"
 	"github.com/IceWhaleTech/CasaOS-Common/utils/logger"
-	"github.com/IceWhaleTech/Falah OS/common"
-	"github.com/IceWhaleTech/Falah OS/model"
-	"github.com/IceWhaleTech/Falah OS/pkg/config"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/common_err"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/httper"
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/ip_helper"
+	"github.com/IceWhaleTech/CasaOS/common"
+	"github.com/IceWhaleTech/CasaOS/model"
+	"github.com/IceWhaleTech/CasaOS/pkg/config"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/common_err"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/httper"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/ip_helper"
 	"github.com/tidwall/gjson"
 	"go.uber.org/zap"
 

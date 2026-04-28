@@ -14,8 +14,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/IceWhaleTech/Falah OS/pkg/utils/file"
-	model2 "github.com/IceWhaleTech/Falah OS/service/model"
+	"github.com/IceWhaleTech/CasaOS/pkg/utils/file"
+	model2 "github.com/IceWhaleTech/CasaOS/service/model"
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )

@@ -11,7 +11,7 @@
 package service
 
 import (
-	model2 "github.com/IceWhaleTech/Falah OS/service/model"
+	model2 "github.com/IceWhaleTech/CasaOS/service/model"
 	"gorm.io/gorm"
 )
 

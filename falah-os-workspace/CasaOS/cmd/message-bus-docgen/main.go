@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/IceWhaleTech/CasaOS-Common/external"
-	"github.com/IceWhaleTech/Falah OS/codegen/message_bus"
-	"github.com/IceWhaleTech/Falah OS/common"
+	"github.com/IceWhaleTech/CasaOS/codegen/message_bus"
+	"github.com/IceWhaleTech/CasaOS/common"
 	"github.com/samber/lo"
 )
 

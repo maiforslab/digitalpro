@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/IceWhaleTech/Falah OS/model"
+	"github.com/IceWhaleTech/CasaOS/model"
 	log "github.com/sirupsen/logrus"
 )
 

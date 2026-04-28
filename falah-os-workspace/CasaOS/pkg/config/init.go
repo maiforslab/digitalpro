@@ -17,8 +17,8 @@ import (
 	"path/filepath"
 
 	"github.com/IceWhaleTech/CasaOS-Common/utils/constants"
-	"github.com/IceWhaleTech/Falah OS/common"
-	"github.com/IceWhaleTech/Falah OS/model"
+	"github.com/IceWhaleTech/CasaOS/common"
+	"github.com/IceWhaleTech/CasaOS/model"
 	"github.com/go-ini/ini"
 )
 
