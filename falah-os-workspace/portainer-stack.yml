@@ -1,7 +1,25 @@
+# ════════════════════════════════════════════════════════════════
+#  Falah OS Community Edition — Portainer Stack
+#  Requires: repo cloned to the Portainer host first
+#  Build:    docker build -t falahos /path/to/falah-os-workspace
+#  Then paste this file into Portainer → Stacks → Add Stack
+# ════════════════════════════════════════════════════════════════
 version: "3.9"
+
 services:
   falahos:
-    build: .
+    image: falahos:latest
+    container_name: falahos
     ports:
-      - "8088:80"
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - falahos_data:/var/lib/casaos
+      - falahos_config:/etc/casaos
+      - falahos_logs:/var/log/casaos
     restart: unless-stopped
+
+volumes:
+  falahos_data:
+  falahos_config:
+  falahos_logs:
