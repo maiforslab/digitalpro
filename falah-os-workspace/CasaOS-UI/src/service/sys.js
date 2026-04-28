@@ -85,12 +85,12 @@ const sys = {
 	},
 
 	// update Falah OS
-	updateFalah OS() {
+	updateFalahOS() {
 		return api.post(`${PREFIX}/update`);
 	},
 
 	// stop falahos
-	stopFalah OS() {
+	stopFalahOS() {
 		return api.post(`${PREFIX}/stop`);
 	},
 

@@ -75,7 +75,7 @@ export default {
 		 */
 		async updateSystem() {
 			this.isUpdating = true;
-			await this.$api.sys.updateFalah OS();
+			await this.$api.sys.updateFalahOS();
 			this.getUpdateLogs()
 		},
 

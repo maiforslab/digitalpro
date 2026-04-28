@@ -80,7 +80,7 @@ export default {
 				if (res.data.success == 200) {
 					this.errorType = "is-success";
 					this.errors = "";
-					// this.$api.sys.stopFalah OS();
+					// this.$api.sys.stopFalahOS();
 					this.checkUpdate();
 				} else {
 					this.isLoading = false;
