@@ -1,0 +1,17 @@
+# Falah OS Community Edition v1.0 — Portainer Stack
+# Deploy via: Portainer → Stacks → Add Stack → paste this file
+version: "3.9"
+
+services:
+  falahos-dashboard:
+    image: falahos/dashboard:v1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: falahos-dashboard
+    ports:
+      - "8088:80"        # Change 8088 to any free port on your host
+    restart: unless-stopped
+    labels:
+      - "com.falah-os.service=dashboard"
+      - "com.falah-os.version=1.0.0"
