@@ -26,13 +26,31 @@ RUN cd CasaOS-Gateway && CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/gateway
 COPY CasaOS/go.mod CasaOS/go.sum ./CasaOS/
 RUN cd CasaOS && go mod download
 COPY CasaOS/ ./CasaOS/
-RUN cd CasaOS && CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/core .
+RUN cd CasaOS && \
+    mkdir -p codegen/message_bus && \
+    go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.12.4 \
+        -generate types,server,spec -package codegen \
+        api/falahos/openapi.yaml > codegen/falahos_api.go && \
+    go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.12.4 \
+        -generate types,client -package message_bus \
+        https://raw.githubusercontent.com/IceWhaleTech/CasaOS-MessageBus/main/api/message_bus/openapi.yaml \
+        > codegen/message_bus/api.go && \
+    CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/core .
 
 # AppManagement
 COPY CasaOS-AppManagement/go.mod CasaOS-AppManagement/go.sum ./CasaOS-AppManagement/
 RUN cd CasaOS-AppManagement && go mod download
 COPY CasaOS-AppManagement/ ./CasaOS-AppManagement/
-RUN cd CasaOS-AppManagement && CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/appmgmt .
+RUN cd CasaOS-AppManagement && \
+    mkdir -p codegen/message_bus && \
+    go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.12.4 \
+        -generate types,server,spec -package codegen \
+        api/app_management/openapi.yaml > codegen/app_management_api.go && \
+    go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.12.4 \
+        -generate types,client -package message_bus \
+        https://raw.githubusercontent.com/IceWhaleTech/CasaOS-MessageBus/main/api/message_bus/openapi.yaml \
+        > codegen/message_bus/api.go && \
+    CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/appmgmt .
 
 # ── Stage 2: Runtime image ───────────────────────────────────────
 FROM alpine:3.18
