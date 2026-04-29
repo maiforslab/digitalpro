@@ -115,8 +115,7 @@ bash deploy-cloudrun.sh <GCP_PROJECT_ID> [REGION]
 ---
 
 ## Active Branch
-`claude/falah-os-v1-build-dmw7p` — open PR #13 against master.
-`install.sh` currently clones this branch for testing; revert `BRANCH=master` before merging.
+`master` — PR #13 merged. `install.sh` correctly clones `master`.
 
 ---
 
