@@ -28,10 +28,23 @@ jobs:
 
       - name: Build image via Cloud Build
         run: |
-          gcloud builds submit \
+          BUILD_ID=$(gcloud builds submit \
             --project $PROJECT_ID \
             --tag $IMAGE \
-            falah-os-workspace/
+            --async \
+            --format="value(id)" \
+            falah-os-workspace/)
+          echo "Build ID: $BUILD_ID"
+          while true; do
+            STATUS=$(gcloud builds describe "$BUILD_ID" --project $PROJECT_ID --format="value(status)")
+            echo "Status: $STATUS"
+            case $STATUS in
+              SUCCESS) echo "Build succeeded."; break ;;
+              FAILURE|CANCELLED|TIMEOUT|INTERNAL_ERROR)
+                echo "Build failed: $STATUS"; exit 1 ;;
+            esac
+            sleep 15
+          done
 
       - name: Deploy to Cloud Run
         run: |
