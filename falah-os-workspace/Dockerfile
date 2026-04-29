@@ -1,6 +1,7 @@
 # ════════════════════════════════════════════════════════════════
 #  Falah OS Community Edition — Production Image
-#  Services: MessageBus → Gateway → Core + AppManagement + UI
+#  Cloud Run compatible: listens on $PORT (default 8080)
+#  Local:               docker compose up -d  (port 80 or 8080)
 # ════════════════════════════════════════════════════════════════
 
 # ── Stage 1: Build all Go services ──────────────────────────────
@@ -37,7 +38,7 @@ RUN cd CasaOS-AppManagement && CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/a
 # ── Stage 2: Runtime image ───────────────────────────────────────
 FROM alpine:3.18
 
-RUN apk add --no-cache supervisor ca-certificates bash tzdata
+RUN apk add --no-cache ca-certificates bash tzdata
 
 # Copy compiled binaries
 COPY --from=go-builder /out/message-bus  /usr/local/bin/falahos-message-bus
@@ -45,9 +46,11 @@ COPY --from=go-builder /out/gateway      /usr/local/bin/falahos-gateway
 COPY --from=go-builder /out/core         /usr/local/bin/falahos-core
 COPY --from=go-builder /out/appmgmt      /usr/local/bin/falahos-appmgmt
 
-# Runtime and data directories — all under /falahos namespace
+# Runtime coordination path (must match CasaOS-Common constants — services find
+# each other's .url files here; not user-visible so keeping upstream path)
 RUN mkdir -p \
-    /var/run/falahos \
+    /var/run/casaos \
+    /etc/casaos \
     /var/lib/falahos/www \
     /var/lib/falahos/db \
     /var/lib/falahos/apps \
@@ -60,14 +63,17 @@ RUN mkdir -p \
 # Pre-built Falah OS frontend
 COPY dist/ /var/lib/falahos/www/
 
-# Service config files
+# Gateway reads config from DefaultConfigPath (/etc/casaos) — no -c flag support
+COPY config/gateway.ini           /etc/casaos/gateway.ini
+# Core and AppManagement read config via -c flag (paths in entrypoint.sh)
 COPY config/falahos.conf          /etc/falahos/falahos.conf
-COPY config/gateway.ini           /etc/falahos/gateway.ini
 COPY config/app-management.conf   /etc/falahos/app-management.conf
 
-# Supervisord config
-COPY supervisord.conf /etc/supervisord.conf
+# Entrypoint (Cloud Run compatible — injects $PORT, starts services in order)
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-EXPOSE 80
+ENV PORT=8080
+EXPOSE 8080
 
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+CMD ["/entrypoint.sh"]

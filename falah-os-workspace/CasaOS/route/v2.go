@@ -51,7 +51,7 @@ func init() {
 }
 
 func InitV2Router() http.Handler {
-	appManagement := v2Route.NewFalah OS()
+	appManagement := v2Route.NewFalahOS()
 
 	e := echo.New()
 

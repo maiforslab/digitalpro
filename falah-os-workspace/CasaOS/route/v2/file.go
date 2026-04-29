@@ -10,7 +10,7 @@ import (
 
 // Path: route/v2/file.go
 
-func (s *Falah OS) GetFileTest(ctx echo.Context) error {
+func (s *FalahOS) GetFileTest(ctx echo.Context) error {
 
 	//http.ServeFile(w, r, r.URL.Path[1:])
 	http.ServeFile(ctx.Response().Writer, ctx.Request(), "/DATA/test.img")
@@ -18,7 +18,7 @@ func (s *Falah OS) GetFileTest(ctx echo.Context) error {
 	return ctx.String(200, "pong")
 }
 
-func (c *Falah OS) CheckUploadChunk(ctx echo.Context, params codegen.CheckUploadChunkParams) error {
+func (c *FalahOS) CheckUploadChunk(ctx echo.Context, params codegen.CheckUploadChunkParams) error {
 	identifier := ctx.QueryParam("identifier")
 	chunkNumber, err := strconv.ParseInt(ctx.QueryParam("chunkNumber"), 10, 64)
 	if err != nil {
@@ -32,7 +32,7 @@ func (c *Falah OS) CheckUploadChunk(ctx echo.Context, params codegen.CheckUpload
 	return ctx.NoContent(http.StatusOK)
 }
 
-func (c *Falah OS) PostUploadFile(ctx echo.Context) error {
+func (c *FalahOS) PostUploadFile(ctx echo.Context) error {
 	path := ctx.FormValue("path")
 
 	// handle the request

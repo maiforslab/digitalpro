@@ -5,12 +5,12 @@ import (
 	"github.com/IceWhaleTech/CasaOS/service"
 )
 
-type Falah OS struct {
+type FalahOS struct {
 	fileUploadService *service.FileUploadService
 }
 
-func NewFalah OS() codegen.ServerInterface {
-	return &Falah OS{
+func NewFalahOS() codegen.ServerInterface {
+	return &FalahOS{
 		fileUploadService: service.NewFileUploadService(),
 	}
 }

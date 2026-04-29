@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO="https://github.com/maiforslab/digitalpro.git"
-BRANCH="master"
+BRANCH="claude/falah-os-v1-build-dmw7p"
 INSTALL_DIR="${HOME:-$PWD}/falahos"
 CONTAINER_NAME="falahos"
 
@@ -105,5 +105,5 @@ printf "  ${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━�
 printf "\n"
 printf "  Logs:    ${CYAN}docker logs -f falahos${RESET}\n"
 printf "  Stop:    ${CYAN}cd %s && docker compose down${RESET}\n" "$INSTALL_DIR/falah-os-workspace"
-printf "  Update:  ${CYAN}curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/master/falah-os-workspace/install.sh | bash${RESET}\n"
+printf "  Update:  ${CYAN}curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/claude/falah-os-v1-build-dmw7p/falah-os-workspace/install.sh | bash${RESET}\n"
 printf "\n"

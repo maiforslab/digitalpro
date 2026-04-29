@@ -13,7 +13,7 @@ import (
 	"github.com/mholt/archiver/v3"
 )
 
-func (s *Falah OS) GetHealthServices(ctx echo.Context) error {
+func (s *FalahOS) GetHealthServices(ctx echo.Context) error {
 	services, err := service.MyService.Health().Services()
 	if err != nil {
 		message := err.Error()
@@ -30,7 +30,7 @@ func (s *Falah OS) GetHealthServices(ctx echo.Context) error {
 	})
 }
 
-func (s *Falah OS) GetHealthPorts(ctx echo.Context) error {
+func (s *FalahOS) GetHealthPorts(ctx echo.Context) error {
 	tcpPorts, udpPorts, err := service.MyService.Health().Ports()
 	if err != nil {
 		message := err.Error()
@@ -46,7 +46,7 @@ func (s *Falah OS) GetHealthPorts(ctx echo.Context) error {
 		},
 	})
 }
-func (c *Falah OS) GetHealthlogs(ctx echo.Context) error {
+func (c *FalahOS) GetHealthlogs(ctx echo.Context) error {
 	var name, currentPath, commonDir, extension string
 	var err error
 	var ar archiver.Writer

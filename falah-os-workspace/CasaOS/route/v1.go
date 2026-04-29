@@ -83,7 +83,7 @@ func InitV1Router() http.Handler {
 			// v1SysGroup.GET("/widget/config", v1.GetWidgetConfig)//delete
 			// v1SysGroup.POST("/widget/config", v1.PostSetWidgetConfig)//delete
 
-			v1SysGroup.POST("/stop", v1.PostKillFalah OS)
+			v1SysGroup.POST("/stop", v1.PostKillFalahOS)
 
 			v1SysGroup.GET("/utilization", v1.GetSystemUtilization)
 			// v1SysGroup.GET("/cpu", v1.GetSystemCupInfo)
