@@ -3,24 +3,27 @@ set -euo pipefail
 
 PORT="${PORT:-8080}"
 
-# Inject the Cloud Run / host-assigned port into gateway config
-sed -i "s/^port=.*/port=${PORT}/" /etc/falahos/gateway.ini
+# Gateway reads from /etc/casaos/gateway.ini (CasaOS-Common DefaultConfigPath)
+# Inject the Cloud Run / host-assigned port before the process starts
+sed -i "s/^port=.*/port=${PORT}/" /etc/casaos/gateway.ini
 
-mkdir -p /var/run/falahos /var/log/falahos
+mkdir -p /var/run/casaos /var/log/falahos
 
 # ── 1. Message Bus ────────────────────────────────────────────────
+# Writes /var/run/casaos/message-bus.url (upstream CasaOS-Common default)
 /usr/local/bin/falahos-message-bus >> /var/log/falahos/message-bus.log 2>&1 &
 MB_PID=$!
 
 echo "[entrypoint] waiting for message-bus..."
-until [ -f /var/run/falahos/message-bus.url ]; do sleep 1; done
+until [ -f /var/run/casaos/message-bus.url ]; do sleep 1; done
 
 # ── 2. Gateway ────────────────────────────────────────────────────
+# Writes /var/run/casaos/management.url; serves UI from /var/lib/falahos/www
 /usr/local/bin/falahos-gateway -w /var/lib/falahos/www >> /var/log/falahos/gateway.log 2>&1 &
 GW_PID=$!
 
 echo "[entrypoint] waiting for gateway management URL..."
-until [ -f /var/run/falahos/management.url ]; do sleep 1; done
+until [ -f /var/run/casaos/management.url ]; do sleep 1; done
 
 # ── 3. Core ───────────────────────────────────────────────────────
 /usr/local/bin/falahos-core -c /etc/falahos/falahos.conf >> /var/log/falahos/core.log 2>&1 &
@@ -38,5 +41,5 @@ fi
 
 echo "[entrypoint] all services started — gateway on port ${PORT}"
 
-# Keep the container alive; exit if any core service dies
+# Keep the container alive; exit when any core service dies
 wait $MB_PID $GW_PID $CORE_PID ${APPMGMT_PID:-}

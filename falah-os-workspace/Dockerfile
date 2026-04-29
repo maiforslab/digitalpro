@@ -46,9 +46,11 @@ COPY --from=go-builder /out/gateway      /usr/local/bin/falahos-gateway
 COPY --from=go-builder /out/core         /usr/local/bin/falahos-core
 COPY --from=go-builder /out/appmgmt      /usr/local/bin/falahos-appmgmt
 
-# Runtime and data directories — all under /falahos namespace
+# Runtime coordination path (must match CasaOS-Common constants — services find
+# each other's .url files here; not user-visible so keeping upstream path)
 RUN mkdir -p \
-    /var/run/falahos \
+    /var/run/casaos \
+    /etc/casaos \
     /var/lib/falahos/www \
     /var/lib/falahos/db \
     /var/lib/falahos/apps \
@@ -61,9 +63,10 @@ RUN mkdir -p \
 # Pre-built Falah OS frontend
 COPY dist/ /var/lib/falahos/www/
 
-# Service config files
+# Gateway reads config from DefaultConfigPath (/etc/casaos) — no -c flag support
+COPY config/gateway.ini           /etc/casaos/gateway.ini
+# Core and AppManagement read config via -c flag (paths in entrypoint.sh)
 COPY config/falahos.conf          /etc/falahos/falahos.conf
-COPY config/gateway.ini           /etc/falahos/gateway.ini
 COPY config/app-management.conf   /etc/falahos/app-management.conf
 
 # Entrypoint (Cloud Run compatible — injects $PORT, starts services in order)
