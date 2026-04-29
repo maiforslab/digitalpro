@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO="https://github.com/maiforslab/digitalpro.git"
-BRANCH="claude/falah-os-v1-build-dmw7p"
+BRANCH="master"
 INSTALL_DIR="${HOME:-$PWD}/falahos"
 CONTAINER_NAME="falahos"
 
