@@ -87,7 +87,8 @@ printf "\n  ${GREEN}✓${RESET}  Image built\n"
 # ── Step 3: Stop old container ───────────────────────────────────
 step 3 "Stopping any existing container..."
 spinner_start "Removing old container..."
-docker compose down 2>/dev/null || true
+docker compose down --remove-orphans 2>/dev/null || true
+docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
 spinner_stop "Old container removed"
 
 # ── Step 4: Start ────────────────────────────────────────────────
@@ -105,5 +106,5 @@ printf "  ${BOLD}${GREEN}━━━━━━━━━━━━━━━━━━�
 printf "\n"
 printf "  Logs:    ${CYAN}docker logs -f falahos${RESET}\n"
 printf "  Stop:    ${CYAN}cd %s && docker compose down${RESET}\n" "$INSTALL_DIR/falah-os-workspace"
-printf "  Update:  ${CYAN}curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/claude/falah-os-v1-build-dmw7p/falah-os-workspace/install.sh | bash${RESET}\n"
+printf "  Update:  ${CYAN}curl -fsSL https://raw.githubusercontent.com/maiforslab/digitalpro/master/falah-os-workspace/install.sh | bash${RESET}\n"
 printf "\n"
