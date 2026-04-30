@@ -10,19 +10,11 @@ sed -i "s/^port=.*/port=${PORT}/" /etc/casaos/gateway.ini
 
 mkdir -p /var/run/casaos /var/lib/casaos/db /var/log/falahos
 
-log "=== system check ==="
-free -m 2>/dev/null || cat /proc/meminfo | grep MemAvailable || true
-df -h /var/lib/casaos /tmp 2>/dev/null || true
-touch /var/lib/casaos/.write_test && log "/var/lib/casaos writable" && rm /var/lib/casaos/.write_test || log "/var/lib/casaos NOT writable"
-log "=== end check ==="
-
 wait_for_file() {
-  local file="$1" label="$2" deadline=$(( $(date +%s) + 60 ))
+  local file="$1" label="$2" deadline=$(( $(date +%s) + 90 ))
   until [ -f "$file" ]; do
     if [ "$(date +%s)" -ge "$deadline" ]; then
       log "ERROR: timed out waiting for $label ($file)"
-      log "--- $label logs ---"
-      cat "/var/log/falahos/${label}.log" 2>/dev/null || true
       exit 1
     fi
     sleep 1
@@ -30,16 +22,19 @@ wait_for_file() {
   log "$label ready"
 }
 
-# ── 1. Message Bus ────────────────────────────────────────────────
+# ── 1 + 2. Message Bus and Gateway start together ────────────────
+# message-bus waits internally for management.url (written by gateway).
+# gateway waits internally for message-bus.url (written by message-bus).
+# Starting both simultaneously breaks the circular wait.
 log "starting message-bus..."
 /usr/local/bin/falahos-message-bus 2>&1 | tee /var/log/falahos/message-bus.log &
 MB_PID=$!
-wait_for_file /var/run/casaos/message-bus.url message-bus
 
-# ── 2. Gateway ────────────────────────────────────────────────────
 log "starting gateway on port ${PORT}..."
 /usr/local/bin/falahos-gateway -w /var/lib/falahos/www 2>&1 | tee /var/log/falahos/gateway.log &
 GW_PID=$!
+
+# Wait for gateway to be fully up (writes management.url after handshake with message-bus)
 wait_for_file /var/run/casaos/management.url gateway
 
 # ── 3. Core ───────────────────────────────────────────────────────
