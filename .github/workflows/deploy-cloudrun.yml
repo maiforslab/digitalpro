@@ -1,4 +1,4 @@
-name: Deploy to Cloud Run
+name: Build and publish Docker image
 
 on:
   push:
@@ -6,65 +6,32 @@ on:
   workflow_dispatch:
 
 env:
-  PROJECT_ID: falah-os
-  REGION: us-central1
-  SERVICE: falahos
-  IMAGE: gcr.io/falah-os/falahos
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ghcr.io/maiforslab/digitalpro
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
 
-      - id: auth
-        uses: google-github-actions/auth@v2
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: google-github-actions/setup-gcloud@v2
-
-      - name: Build image via Cloud Build
-        run: |
-          BUILD_ID=$(gcloud builds submit \
-            --project $PROJECT_ID \
-            --tag $IMAGE \
-            --async \
-            --format="value(id)" \
-            falah-os-workspace/)
-          echo "Build ID: $BUILD_ID"
-          while true; do
-            STATUS=$(gcloud builds describe "$BUILD_ID" --project $PROJECT_ID --format="value(status)")
-            echo "Status: $STATUS"
-            case $STATUS in
-              SUCCESS) echo "Build succeeded."; break ;;
-              FAILURE|CANCELLED|TIMEOUT|INTERNAL_ERROR)
-                echo "Build failed: $STATUS"; exit 1 ;;
-            esac
-            sleep 15
-          done
-
-      - name: Deploy to Cloud Run
-        run: |
-          gcloud run deploy $SERVICE \
-            --project $PROJECT_ID \
-            --image $IMAGE \
-            --region $REGION \
-            --platform managed \
-            --allow-unauthenticated \
-            --port 8080 \
-            --memory 512Mi \
-            --cpu 1 \
-            --min-instances 0 \
-            --max-instances 3 \
-            --timeout 60
-
-      - name: Print URL
-        run: |
-          URL=$(gcloud run services describe $SERVICE \
-            --project $PROJECT_ID \
-            --region $REGION \
-            --format "value(status.url)")
-          echo "Falah OS live at: $URL"
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+          context: falah-os-workspace
+          push: true
+          tags: |
+            ghcr.io/maiforslab/digitalpro:latest
+            ghcr.io/maiforslab/digitalpro:${{ github.sha }}

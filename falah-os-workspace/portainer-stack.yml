@@ -1,16 +1,12 @@
 # ════════════════════════════════════════════════════════════════
 #  Falah OS Community Edition — Portainer Stack
-#
-#  Step 1 — Build the image on your Docker host:
-#    cd ~/falahos/falah-os-workspace
-#    docker build -t falahos:latest .
-#
-#  Step 2 — In Portainer: Stacks → Add Stack → paste this file
+#  In Portainer: Stacks → Add Stack → Web editor → paste this file
+#  Image is pulled automatically from GitHub Container Registry
 # ════════════════════════════════════════════════════════════════
 
 services:
   falahos:
-    image: falahos:latest
+    image: ghcr.io/maiforslab/digitalpro:latest
     container_name: falahos
     ports:
       - "7080:8080"
