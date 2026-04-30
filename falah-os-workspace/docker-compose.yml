@@ -15,11 +15,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - falahos_data:/var/lib/falahos
+      - falahos_msgbus:/var/lib/casaos
       - falahos_config:/etc/falahos
       - falahos_logs:/var/log/falahos
     restart: unless-stopped
 
 volumes:
   falahos_data:
+  falahos_msgbus:
   falahos_config:
   falahos_logs:
