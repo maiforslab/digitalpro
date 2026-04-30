@@ -56,7 +56,7 @@ COPY --from=go-builder /out/appmgmt      /usr/local/bin/falahos-appmgmt
 RUN mkdir -p \
     /var/run/casaos \
     /etc/casaos \
-    /var/lib/casaos \
+    /var/lib/casaos/db \
     /var/lib/falahos/www \
     /var/lib/falahos/db \
     /var/lib/falahos/apps \

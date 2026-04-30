@@ -8,7 +8,7 @@ log() { echo "[entrypoint] $*"; }
 # Gateway reads from /etc/casaos/gateway.ini (CasaOS-Common DefaultConfigPath)
 sed -i "s/^port=.*/port=${PORT}/" /etc/casaos/gateway.ini
 
-mkdir -p /var/run/casaos /var/log/falahos
+mkdir -p /var/run/casaos /var/lib/casaos/db /var/log/falahos
 
 log "=== system check ==="
 free -m 2>/dev/null || cat /proc/meminfo | grep MemAvailable || true
