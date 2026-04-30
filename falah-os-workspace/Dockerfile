@@ -7,15 +7,15 @@
 # ── Stage 1: Build all Go services ──────────────────────────────
 FROM golang:1.21-alpine AS go-builder
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git gcc musl-dev
 
 WORKDIR /src
 
-# MessageBus (cloned from upstream IceWhale)
+# MessageBus (cloned from upstream IceWhale; CGO enabled for reliable SQLite)
 RUN git clone --depth 1 https://github.com/IceWhaleTech/CasaOS-MessageBus.git && \
     cd CasaOS-MessageBus && \
     go mod download && \
-    CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/message-bus .
+    go build -ldflags="-s -w" -o /out/message-bus .
 
 # Gateway
 COPY CasaOS-Gateway/go.mod CasaOS-Gateway/go.sum ./CasaOS-Gateway/
