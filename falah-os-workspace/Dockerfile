@@ -66,8 +66,8 @@ RUN mkdir -p \
     /etc/falahos \
     /usr/share/falahos/shell
 
-# Pre-built Falah OS frontend
-COPY dist/ /var/lib/falahos/www/
+# Pre-built Falah OS frontend (outside volume mounts so it's always served from image)
+COPY dist/ /usr/share/falahos/www/
 
 # Gateway reads config from DefaultConfigPath (/etc/casaos) — no -c flag support
 COPY config/gateway.ini           /etc/casaos/gateway.ini

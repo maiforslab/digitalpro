@@ -31,7 +31,7 @@ log "starting message-bus..."
 MB_PID=$!
 
 log "starting gateway on port ${PORT}..."
-/usr/local/bin/falahos-gateway -w /var/lib/falahos/www 2>&1 | tee /var/log/falahos/gateway.log &
+/usr/local/bin/falahos-gateway -w /usr/share/falahos/www 2>&1 | tee /var/log/falahos/gateway.log &
 GW_PID=$!
 
 # Wait for gateway to be fully up (writes management.url after handshake with message-bus)
