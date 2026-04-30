@@ -10,6 +10,12 @@ sed -i "s/^port=.*/port=${PORT}/" /etc/casaos/gateway.ini
 
 mkdir -p /var/run/casaos /var/log/falahos
 
+log "=== system check ==="
+free -m 2>/dev/null || cat /proc/meminfo | grep MemAvailable || true
+df -h /var/lib/casaos /tmp 2>/dev/null || true
+touch /var/lib/casaos/.write_test && log "/var/lib/casaos writable" && rm /var/lib/casaos/.write_test || log "/var/lib/casaos NOT writable"
+log "=== end check ==="
+
 wait_for_file() {
   local file="$1" label="$2" deadline=$(( $(date +%s) + 60 ))
   until [ -f "$file" ]; do
