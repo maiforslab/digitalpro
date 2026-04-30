@@ -1,25 +1,42 @@
 # ════════════════════════════════════════════════════════════════
 #  Falah OS Community Edition — Portainer Stack
-#  Requires: repo cloned to the Portainer host first
-#  Build:    docker build -t falahos /path/to/falah-os-workspace
-#  Then paste this file into Portainer → Stacks → Add Stack
+#
+#  Step 1 — Build the image on your Docker host:
+#    cd ~/falahos/falah-os-workspace
+#    docker build -t falahos:latest .
+#
+#  Step 2 — In Portainer: Stacks → Add Stack → paste this file
 # ════════════════════════════════════════════════════════════════
-version: "3.9"
 
 services:
   falahos:
     image: falahos:latest
     container_name: falahos
     ports:
-      - "80:80"
+      - "7080:8080"
+    environment:
+      - PORT=8080
+      - TMPDIR=/tmp
+    security_opt:
+      - seccomp:unconfined
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - falahos_data:/var/lib/falahos
+      # Persistent data only — do NOT mount /var/lib/falahos wholesale
+      # as it hides the UI files baked into the image
+      - falahos_casaos_db:/var/lib/casaos/db
+      - falahos_core_db:/var/lib/falahos/db
+      - falahos_core_conf:/var/lib/falahos/conf
+      - falahos_apps:/var/lib/falahos/apps
+      - falahos_istore:/var/lib/falahos/istore
       - falahos_config:/etc/falahos
       - falahos_logs:/var/log/falahos
     restart: unless-stopped
 
 volumes:
-  falahos_data:
+  falahos_casaos_db:
+  falahos_core_db:
+  falahos_core_conf:
+  falahos_apps:
+  falahos_istore:
   falahos_config:
   falahos_logs:
