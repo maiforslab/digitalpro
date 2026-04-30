@@ -37,7 +37,11 @@ GW_PID=$!
 # Wait for gateway to be fully up (writes management.url after handshake with message-bus)
 wait_for_file /var/run/casaos/management.url gateway
 
-# ── 3. Core ───────────────────────────────────────────────────────
+# ── 3. UserService + Core (both need gateway management URL) ─────
+log "starting user-service..."
+/usr/local/bin/falahos-user-service 2>&1 | tee /var/log/falahos/user-service.log &
+US_PID=$!
+
 log "starting core..."
 /usr/local/bin/falahos-core -c /etc/falahos/falahos.conf 2>&1 | tee /var/log/falahos/core.log &
 CORE_PID=$!
@@ -54,4 +58,4 @@ fi
 
 log "all services started — gateway on port ${PORT}"
 
-wait $MB_PID $GW_PID $CORE_PID ${APPMGMT_PID:-}
+wait $MB_PID $GW_PID $US_PID $CORE_PID ${APPMGMT_PID:-}

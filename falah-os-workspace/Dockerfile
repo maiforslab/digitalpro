@@ -34,6 +34,17 @@ RUN cd CasaOS && go mod download
 COPY CasaOS/ ./CasaOS/
 RUN cd CasaOS && CGO_ENABLED=0 go build -ldflags="-s -w" -o /out/core .
 
+# UserService — handles /v1/users/* (login, register, status, JWT)
+# Also uses glebarez/sqlite — swap to mattn/go-sqlite3 same as MessageBus
+RUN git clone --depth 1 https://github.com/IceWhaleTech/CasaOS-UserService.git && \
+    cd CasaOS-UserService && \
+    for f in $(find . -name "*.go"); do \
+        sed 's|github.com/glebarez/sqlite|gorm.io/driver/sqlite|g' "$f" > "$f.tmp" && mv "$f.tmp" "$f"; \
+    done && \
+    go get gorm.io/driver/sqlite@latest && \
+    go mod tidy && \
+    go build -ldflags="-s -w" -o /out/user-service .
+
 # AppManagement
 COPY CasaOS-AppManagement/go.mod CasaOS-AppManagement/go.sum ./CasaOS-AppManagement/
 RUN cd CasaOS-AppManagement && go mod download
@@ -46,10 +57,11 @@ FROM alpine:3.18
 RUN apk add --no-cache ca-certificates bash tzdata
 
 # Copy compiled binaries
-COPY --from=go-builder /out/message-bus  /usr/local/bin/falahos-message-bus
-COPY --from=go-builder /out/gateway      /usr/local/bin/falahos-gateway
-COPY --from=go-builder /out/core         /usr/local/bin/falahos-core
-COPY --from=go-builder /out/appmgmt      /usr/local/bin/falahos-appmgmt
+COPY --from=go-builder /out/message-bus   /usr/local/bin/falahos-message-bus
+COPY --from=go-builder /out/gateway       /usr/local/bin/falahos-gateway
+COPY --from=go-builder /out/user-service  /usr/local/bin/falahos-user-service
+COPY --from=go-builder /out/core          /usr/local/bin/falahos-core
+COPY --from=go-builder /out/appmgmt       /usr/local/bin/falahos-appmgmt
 
 # Runtime coordination path (must match CasaOS-Common constants — services find
 # each other's .url files here; not user-visible so keeping upstream path)
@@ -57,6 +69,7 @@ RUN mkdir -p \
     /var/run/casaos \
     /etc/casaos \
     /var/lib/casaos/db \
+    /var/lib/casaos/user-service/db \
     /var/lib/falahos/www \
     /var/lib/falahos/db \
     /var/lib/falahos/apps \
