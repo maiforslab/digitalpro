@@ -11,10 +11,14 @@ RUN apk add --no-cache git gcc musl-dev
 
 WORKDIR /src
 
-# MessageBus (cloned from upstream IceWhale; CGO enabled for reliable SQLite)
+# MessageBus — swap modernc.org/sqlite (pure-Go, broken on some kernels) for
+# mattn/go-sqlite3 (real C SQLite, requires CGO; gcc+musl-dev already installed)
 RUN git clone --depth 1 https://github.com/IceWhaleTech/CasaOS-MessageBus.git && \
     cd CasaOS-MessageBus && \
-    go mod download && \
+    grep -rl "github.com/glebarez/sqlite" --include="*.go" . | \
+        xargs sed -i 's|github.com/glebarez/sqlite|gorm.io/driver/sqlite|g' && \
+    go get gorm.io/driver/sqlite@latest && \
+    go mod tidy && \
     go build -ldflags="-s -w" -o /out/message-bus .
 
 # Gateway
