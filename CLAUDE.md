@@ -14,6 +14,29 @@ The gateway proxies all traffic and serves the UI.
 
 ---
 
+## Five Services (not four)
+
+The original CLAUDE.md said four services. There are actually **five**:
+
+```
+MessageBus → Gateway → UserService → Core
+                                  → AppManagement
+```
+
+`CasaOS-UserService` handles all of `/v1/users/*` and `/.well-known/jwks.json`:
+- `/v1/users/status` — called by Vue router on every page load to check auth state
+- `/v1/users/login`, `/v1/users/register` — authentication
+- JWT token issuance and refresh
+
+Without UserService the Vue app gets no response on startup and renders a blank page.
+UserService is cloned from `https://github.com/IceWhaleTech/CasaOS-UserService`
+and built in the Dockerfile alongside the other services.
+
+UserService also uses `glebarez/sqlite` (modernc.org/sqlite) which fails on this
+kernel config — same fix applied: swap to `mattn/go-sqlite3` during build.
+
+---
+
 ## CRITICAL: Runtime Path Invariants
 
 `CasaOS-Common` (upstream dependency, not in this repo) hardcodes three paths:
