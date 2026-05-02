@@ -1,7 +1,12 @@
 # ════════════════════════════════════════════════════════════════
 #  Falah OS Community Edition — Portainer Stack
-#  In Portainer: Stacks → Add Stack → Web editor → paste this file
-#  Image is pulled automatically from GitHub Container Registry
+#
+#  PORTAINER REPOSITORY MODE: use THIS file, not docker-compose.yml
+#    Stacks → Add Stack → Repository
+#    Compose path: falah-os-workspace/portainer-stack.yml
+#
+#  Pulls the pre-built image from GitHub Container Registry.
+#  (docker-compose.yml triggers a local build which fails in Portainer)
 # ════════════════════════════════════════════════════════════════
 
 services:
@@ -18,8 +23,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       # Persistent data only — do NOT mount /var/lib/falahos wholesale
-      # as it hides the UI files baked into the image
+      # as it hides the UI files baked into /usr/share/falahos/www in the image
       - falahos_casaos_db:/var/lib/casaos/db
+      - falahos_userservice_db:/var/lib/casaos/user-service/db
       - falahos_core_db:/var/lib/falahos/db
       - falahos_core_conf:/var/lib/falahos/conf
       - falahos_apps:/var/lib/falahos/apps
@@ -30,6 +36,7 @@ services:
 
 volumes:
   falahos_casaos_db:
+  falahos_userservice_db:
   falahos_core_db:
   falahos_core_conf:
   falahos_apps:
